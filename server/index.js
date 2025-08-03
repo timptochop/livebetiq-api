@@ -1,3 +1,4 @@
+// server/index.js
 const express = require('express');
 const cors = require('cors');
 const mockGoalServeAPI = require('./mockGoalServeAPI');
@@ -7,7 +8,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 
-// ✅ Σωστή διαδρομή που θα χρησιμοποιείται στο frontend:
+// ✅ Σύνδεσε το route στο σωστό endpoint
 app.use('/api/predictions', mockGoalServeAPI);
 
 app.listen(PORT, () => {
