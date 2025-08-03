@@ -7,10 +7,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 
-// Κύρια διαδρομή
-app.use('/api/tennis', mockGoalServeAPI);
-
-// ✅ Alias διαδρομή για το frontend
+// ✅ Σωστή διαδρομή που θα χρησιμοποιείται στο frontend:
 app.use('/api/predictions', mockGoalServeAPI);
 
 app.listen(PORT, () => {

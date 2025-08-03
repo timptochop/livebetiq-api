@@ -1,8 +1,6 @@
-// server/mockGoalServeAPI.js
 const express = require('express');
 const router = express.Router();
 
-// 🔧 Helper functions
 function calculateEV(odds1, odds2) {
   const prob1 = 1 / odds1;
   const prob2 = 1 / odds2;
@@ -31,7 +29,6 @@ function generateNote(label, ev, conf) {
   return 'Αγώνας πλησιάζει – χωρίς πρόβλεψη.';
 }
 
-// 🔢 Αρχικά mock odds (όπως είχες)
 const rawMatches = [
   { id: 1, player1: "Djokovic", player2: "Alcaraz", odds1: 1.40, odds2: 3.00 },
   { id: 2, player1: "Nadal", player2: "Medvedev", odds1: 2.00, odds2: 1.80 },
@@ -42,7 +39,6 @@ const rawMatches = [
   { id: 7, player1: "Kyrgios", player2: "Berrettini", odds1: 1.45, odds2: 2.80 }
 ];
 
-// 🔁 Εμπλουτισμένα δεδομένα με EV, confidence, label, note
 const enrichedMatches = rawMatches.map((match) => {
   const ev = calculateEV(match.odds1, match.odds2);
   const confidence = estimateConfidence(match.odds1, match.odds2);
@@ -62,7 +58,12 @@ const enrichedMatches = rawMatches.map((match) => {
   };
 });
 
-// 🔗 Route: /api/tennis/live
+// ✅ Βασικό route: /api/predictions
+router.get('/', (req, res) => {
+  res.json(enrichedMatches);
+});
+
+// ✅ Επιπλέον route (προαιρετικό): /api/predictions/live
 router.get('/live', (req, res) => {
   res.json(enrichedMatches);
 });
